@@ -6,19 +6,6 @@ const pastPeriodContainer = document.getElementById("past-periods");
 // Add the storage key as an app-wide constant
 const STORAGE_KEY = "period-tracker";
 
-// Listen to form submissions.
-newPeriodFormEl.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const startDate = startDateInputEl.value;
-    const endDate = endDateInputEl.value;
-    if (checkDatesInvalid(startDate, endDate)) {
-        return;
-    }
-    storeNewPeriod(startDate, endDate);
-    renderPastPeriods();
-    newPeriodFormEl.reset();
-});
-
 function checkDatesInvalid(startDate, endDate) {
     if (!startDate || !endDate || startDate > endDate) {
         newPeriodFormEl.reset();
@@ -69,5 +56,18 @@ function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", { timeZone: "UTC" });
 }
+
+// Listen to form submissions.
+newPeriodFormEl.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const startDate = startDateInputEl.value;
+    const endDate = endDateInputEl.value;
+    if (checkDatesInvalid(startDate, endDate)) {
+        return;
+    }
+    storeNewPeriod(startDate, endDate);
+    renderPastPeriods();
+    newPeriodFormEl.reset();
+});
 
 renderPastPeriods();
