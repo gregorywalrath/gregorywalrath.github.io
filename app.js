@@ -62,9 +62,9 @@ newPeriodFormEl.addEventListener("submit", (event) => {
     event.preventDefault();
     const startDate = startDateInputEl.value;
     const endDate = endDateInputEl.value;
-    if (checkDatesInvalid(startDate, endDate)) {
-        return;
-    }
+    // if (checkDatesInvalid(startDate, endDate)) {
+    //     return;
+    // }
     storeNewPeriod(startDate, endDate);
     renderPastPeriods();
     newPeriodFormEl.reset();
