@@ -1,38 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" />
-    <title>Cycle Tracker</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="cycletracker.json" />
-    <link rel="icon" href="icons/circle.svg" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.css">
+  <link rel="manifest" href="manifest.json">
+  <title>Basketball Stats Tracker</title>
 </head>
-<body>
-    <h1>Period Tracker</h1>
-    <form>
-        <fieldset>
-            <legend>Enter your period start and end date</legend>
-            <p>
-                <label for="start-date">Start date</label>
-                <input type="date" id="start-date" required>
-            </p>
-            <p>
-                <label for="end-date">End date</label>
-                <input type="date" id="end-date" required>
-            </p>
-        </fieldset>
-        <p>
-            <button type="submit">Add Period</button>
-        </p>
-    </form>
-    <section id="past-periods">
-    </section>
-    <script src="app.js" defer></script>
-    <script>
-        if ("serviceWorker" in navigator){
-            navigator.serviceWorker.register("sw.js");
-        }
-    </script>
+<body class="container">
+  <header class="text-center">
+    <h1>Basketball Stats Tracker</h1>
+  </header>
+  <main>
+    <div class="card" id="add-player">
+        <div class="card-header"><h2>Add Player</h2></div>
+        <div class="card-body">
+            <form id="add-player">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="player-name" placeholder="Player Name" required>
+                            <label for="player-name">Player Name</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="player-team" placeholder="Team Name" required>
+                            <label for="player-team">Team</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2"><div class="col text-center"><button type="submit" class="btn btn-sm btn-primary">Add Player</button></div></div>
+            </form>
+        </div>
+    </div>
+    <div class="card mt-3" id="log-stats">
+        <div class="card-header"><h2>Log Stats</h2></div>
+        <div class="card-body">
+            <form id="stats-form">
+                <div class="row mb-2"><div class="col"><select id="player-select" class="form-select"></select></div></div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <input type="date" id="game-date" class="form-control">
+                    </div>
+                    <div class="col"><input type="text" id="oppenent" class="form-control" placeholder="Oppenent..."></div>
+                </div>
+                <div class="row mb-2 text-center">
+                    <div class="col">FG: <span id="fgMade">0</span> / <span id="fgAttempts">0</span></div>
+                    <div class="col">2PT: <span id="2ptMade">0</span> / <span id="2ptAttempts">0</span></div>
+                    <div class="col">3PT: <span id="3ptMade">0</span> / <span id="3ptAttempts">0</span></div>
+                </div>
+                <div class="row mb-2 text-center"><b>Total Points: <i><span id="totalPoints">0</span></i></b></div>
+                <div class="row mb-2 text-center">
+                    <div class="col">Blocks: <span id="blocks">0</span></div>
+                    <div class="col">Steals: <span id="steals">0</span></div>
+                    <div class="col">Fouls: <span id="fouls">0</span></div>
+                </div>
+                <div class="row mb-2 text-center"><div class="col">Rebounds: <span id="rebounds">0</span></div></div>
+                <div class="row mb-2 text-center">
+                    <div class="col">
+                        <button class="btn btn-sm btn-secondary mb-2" id="fg-attempt">FG Attempt</button>
+                        <button class="btn btn-sm btn-secondary" id="fg-made">FG Made</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-sm btn-secondary mb-2" id="2pt-attempt">2pt Attempt</button>
+                        <button class="btn btn-sm btn-secondary" id="2pt-made">2pt Made</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-sm btn-secondary mb-2" id="3pt-attempt">3pt Attempt</button>
+                        <button class="btn btn-sm btn-secondary" id="3pt-made">3pt Made</button>
+                    </div>
+                </div>
+                <div class="row mb-2 text-center">
+                    <div class="col"><button class="btn btn-sm btn-secondary" id="block">Block</button></div>
+                    <div class="col"><button class="btn btn-sm btn-secondary" id="steal">Steal</button></div>
+                    <div class="col"><button class="btn btn-sm btn-secondary" id="foul">Foul</button></div>
+                </div>
+                <div class="row mb-3 text-center">
+                    <div class="col"><button class="btn btn-sm btn-secondary" id="rebound">Rebound</button></div>
+                </div>
+                <div class="row mt-3"><div class="col text-center"><button type="submit" class="btn btn-primary w-100">Log Stats</button></div></div>
+            </form>
+        </div>
+    </div>
+    <div class="card mt-3" id="manage-players">
+        <div class="card-header"><h2>Manage Players</h2></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col"><ul id="player-list"></ul></div>
+            </div>
+        </div>
+    </div>
+  </main>
+  <script src="app.js"></script>
 </body>
 </html>
